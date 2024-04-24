@@ -28,6 +28,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslit": "^6.0.0",
     "postcss": "^8.4.38",
     "prettier-plugin-tailwindcss": "^0.5.14",
