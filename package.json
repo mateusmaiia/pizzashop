@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
@@ -20,10 +21,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.4",
+    "react-hook-form": "^7.51.3",
     "react-router-dom": "^6.23.0",
     "sort-by": "^1.2.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.4"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
@@ -34,6 +37,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.1.1",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslit": "^6.0.0",
     "postcss": "^8.4.38",
