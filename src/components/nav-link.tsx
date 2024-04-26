@@ -9,7 +9,7 @@ export function NavLik(props: NavLinkProps){
         <Link 
             //data-attributes recebem valores true ou false;
             //Se o pathname for igual ao props.to === true;
-            //props.to === link que o link está enviando.
+            //props.to === rota que o link está enviando.
             //pathname === rota atual.
             data-current={pathname === props.to }
             className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground data-[current=true]:text-foreground" 
