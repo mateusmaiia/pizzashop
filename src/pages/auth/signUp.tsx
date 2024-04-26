@@ -79,6 +79,16 @@ export function SignUp() {
             <Button disabled={isSubmitting} className="w-full" type="submit" {...register("submit")}>
               Finalizar cadastro
             </Button>
+            <p className='px-6 text-center text-sm leading-relaxed text-muted-foreground'>
+              Ao continuar, você concorda com nossos {' '}
+              <a href="#" className='underline underline-offset-4'>
+                termos de serviço
+              </a>{' '}
+              e{' '}
+              <a href="#" className='underline underline-offset-4'>
+                políticas de privacidade
+              </a>
+            </p>
           </form>
         </div>
       </div>
