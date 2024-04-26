@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 import {useForm} from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -18,22 +18,21 @@ type signUpForm = z.infer<typeof signUpForm>
 
 
 export function SignUp() {
+  const navigate = useNavigate()
   const {register,  handleSubmit, formState: {isSubmitting}} = useForm()
 
   async function handleSignUp(data: signUpForm){
-    
     try {
       console.log(data)
       await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success("Enviamos um link de confirmação no seu e-mail")
-    //   toast.success("Enviamos um link de confirmação no seu e-mail", {
-    //     action: {
-    //     label: "Reenviar",
-    //     onClick: () => handleSignUp(data)
-    //     }
-    //   })
+      toast.success("Restaurante cadastrado com sucesso!", {
+        action: {
+        label: "Login",
+        onClick: () => navigate("/sign-in")
+        }
+      })
     } catch (error) {
-      toast.error('Credencias inválidas.')
+      toast.error('Erro ao cadastrar restaurante.')
     }
   }
 
