@@ -8,7 +8,7 @@ import { Toaster } from 'sonner'
 export function App() {
   return (
     <HelmetProvider>
-      <Toaster />
+      <Toaster richColors/>
       <Helmet titleTemplate="%s | pizza.shop" />
       <RouterProvider router={router} />
     </HelmetProvider>
