@@ -22,12 +22,7 @@ export function SignIn() {
     try {
       console.log(data)
       await new Promise(resolve => setTimeout(resolve, 2000))
-      toast.success("Enviamos um link de confirmação no seu e-mail", {
-        action: {
-        label: "Reenviar",
-        onClick: () => handleSignIn(data)
-        }
-      })
+      toast.success("Enviamos um link de confirmação no seu e-mail")
     } catch (error) {
       toast.error('Credencias inválidas.')
     }
