@@ -12,13 +12,14 @@ const signInForm = z.object({
   email: z.string().email(),
 })
 
-type signInForm = z.infer<typeof signInForm>
+// Converte essa estrutura Zod para uma tipagem Typescript.
+type SignInForm = z.infer<typeof signInForm>
 
 
 export function SignIn() {
-  const {register,  handleSubmit, formState: {isSubmitting}} = useForm()
+  const {register,  handleSubmit, formState: {isSubmitting}} = useForm<SignInForm>()
 
-  async function handleSignIn(data: signInForm){
+  async function handleSignIn(data: SignInForm){
     try {
       console.log(data)
       await new Promise(resolve => setTimeout(resolve, 2000))
@@ -52,7 +53,7 @@ export function SignIn() {
               <Input id='email' type='email' {...register("email")}/>
             </div>
 
-            <Button disabled={isSubmitting} className="w-full" type="submit" {...register("submit")}>
+            <Button disabled={isSubmitting} className="w-full" type="submit" >
               Acessar painel
             </Button>
           </form>

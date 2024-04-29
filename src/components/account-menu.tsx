@@ -1,8 +1,11 @@
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 import { Button } from './ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
+import { Link } from 'react-router-dom'
 
 export function AccountMenu(){
+
+
     return(
         <DropdownMenu>
             {/* //asChild --> passa todas as funcionalidades e propriedades para o componente logo abaixo dele */}
@@ -26,9 +29,9 @@ export function AccountMenu(){
                 </DropdownMenuItem>
 
 
-                <DropdownMenuItem className='text-rose-500 dark:text-rose-400'>
+                <DropdownMenuItem  className='text-rose-500 dark:text-rose-400'>
                     <LogOut className='w-4 h-4 mr-2'/>
-                    <span>LogOut</span>
+                    <Link to="/sign-up">LogOut</Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

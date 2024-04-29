@@ -14,14 +14,14 @@ const signUpForm = z.object({
     email: z.string().email()
 })
 
-type signUpForm = z.infer<typeof signUpForm>
+type SignUpForm = z.infer<typeof signUpForm>
 
 
 export function SignUp() {
   const navigate = useNavigate()
-  const {register,  handleSubmit, formState: {isSubmitting}} = useForm()
+  const {register,  handleSubmit, formState: {isSubmitting}} = useForm<SignUpForm>()
 
-  async function handleSignUp(data: signUpForm){
+  async function handleSignUp(data: SignUpForm){
     try {
       console.log(data)
       await new Promise(resolve => setTimeout(resolve, 2000))
@@ -75,7 +75,7 @@ export function SignUp() {
                     <Label htmlFor="phone">Seu celular</Label>
                     <Input id="phone" type="tel" {...register('phone')}/>
                 </div>
-            <Button disabled={isSubmitting} className="w-full" type="submit" {...register("submit")}>
+            <Button disabled={isSubmitting} className="w-full" type="submit" >
               Finalizar cadastro
             </Button>
             <p className='px-6 text-center text-sm leading-relaxed text-muted-foreground'>
