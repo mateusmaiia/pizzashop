@@ -52,7 +52,7 @@ export function SignUp() {
               Criar conta gŕatis
             </h1>
             <p className="text-sm text-muted-foreground">
-                Seja um parceiro e comece suas vendas!k
+                Seja um parceiro e comece suas vendas!
             </p>
           </div>
           <form className="space-y-4" onSubmit={handleSubmit(handleSignUp)}>
