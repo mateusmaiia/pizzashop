@@ -20,55 +20,59 @@ export function Orders(){
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead></TableHead>
-                                <TableHead>Identificador</TableHead>
-                                <TableHead>Realizado há</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead className='w-[64px]'></TableHead>
+                                <TableHead className='w-[140px]'>Identificador</TableHead>
+                                <TableHead className='w-[180px]'>Realizado há</TableHead>
+                                <TableHead className='w-[140px]'>Status</TableHead>
                                 <TableHead>Cliente</TableHead>
-                                <TableHead>Total do pedido</TableHead>
-                                <TableHead></TableHead>
-                                <TableHead></TableHead>
+                                <TableHead className='w-[140px]'>Total do pedido</TableHead>
+                                <TableHead className='w-[164px]'></TableHead>
+                                <TableHead className='w-[132px]'></TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                    <Button variant="outline" size="xs">
-                                        <Search className='h-3 w-3'/>
-                                        <span className='sr-only'>Detalhe do pedido</span>
-                                    </Button>
-                                </TableCell>
-                                <TableCell className='font-mono text-xs font-medium'>
-                                    89439kjde19q0k1
-                                </TableCell>
-                                <TableCell className='text-muted-foreground'>
-                                    há 15 minutos
-                                </TableCell>
-                                <TableCell>
-                                    <div className='flex items-center gap-2'>
-                                        <span className='h-2 w-2 rounded-full bg-slate-400'></span>
-                                        <span className='font-medium text-muted-foreground'>Pendente</span>
-                                    </div>
-                                </TableCell>
-                                <TableCell className='font-medium'>
-                                    Matteus Schell Fernandes
-                                </TableCell>
-                                <TableCell className='font-medium'>
-                                    R$ 149,98
-                                </TableCell>
-                                <TableCell className=''>
-                                    <Button variant="outline" size="xs">
-                                        <ArrowRight className='mr-2 h-3 w-3'/>
-                                        Aprovar
-                                    </Button>
-                                </TableCell>  
-                                <TableCell className=''>
-                                    <Button variant="ghost" size="xs">
-                                        <X className='mr-2 h-3 w-3'/>
-                                        Cancelar
-                                    </Button>
-                                </TableCell>    
-                            </TableRow>
+                            {Array.from({length: 10}).map((_, i) => {
+                                return(
+                                    <TableRow key={i}>
+                                        <TableCell>
+                                            <Button variant="outline" size="xs">
+                                                <Search className='h-3 w-3'/>
+                                                <span className='sr-only'>Detalhe do pedido</span>
+                                            </Button>
+                                        </TableCell>
+                                        <TableCell className='font-mono text-xs font-medium'>
+                                            89439kjde19q0k1
+                                        </TableCell>
+                                        <TableCell className='text-muted-foreground'>
+                                            há 15 minutos
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className='flex items-center gap-2'>
+                                                <span className='h-2 w-2 rounded-full bg-slate-400'></span>
+                                                <span className='font-medium text-muted-foreground'>Pendente</span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className='font-medium'>
+                                            Matteus Schell Fernandes
+                                        </TableCell>
+                                        <TableCell className='font-medium'>
+                                            R$ 149,98
+                                        </TableCell>
+                                        <TableCell className=''>
+                                            <Button variant="outline" size="xs">
+                                                <ArrowRight className='mr-2 h-3 w-3'/>
+                                                Aprovar
+                                            </Button>
+                                        </TableCell>  
+                                        <TableCell className=''>
+                                            <Button variant="ghost" size="xs">
+                                                <X className='mr-2 h-3 w-3'/>
+                                                Cancelar
+                                            </Button>
+                                        </TableCell>    
+                                    </TableRow>
+                                )
+                            })}
                         </TableBody>
                     </Table>
                 </div>
