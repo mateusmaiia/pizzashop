@@ -7,8 +7,17 @@ import {
     PieChart,
     CartesianGrid,
     Pie,
+    Cell,
 } from 'recharts'  
 import { BarChart, LineChart } from 'lucide-react'
+
+const COLORS = [
+    colors.sky[500],
+    colors.amber[500],
+    colors.violet[500],
+    colors.emerald[500],
+    colors.rose[500],
+]
 
 const data = [
     {product: 'Pepperoni', amount: 40},
@@ -42,7 +51,11 @@ export function PopularProductsChart(){
                         innerRadius={64}
                         strokeWidth={8}                    
                     >
-
+                        {
+                            data.map((_, index) => {
+                                return <Cell key={`cell-${index}`} fill={COLORS[index]}/>
+                            })
+                        }
                     </Pie>
                 </PieChart>   
               </ResponsiveContainer>  
