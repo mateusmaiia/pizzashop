@@ -25,15 +25,17 @@ export function SignIn() {
     formState: {isSubmitting}
   } = useForm<SignInForm>()
 
-  useMutation({
+  const {mutateAsync: authentication} = useMutation({
     mutationFn: signIn,
 
   })
 
   async function handleSignIn(data: SignInForm){
+    
     try {
-      console.log(data)
-      await new Promise(resolve => setTimeout(resolve, 2000))
+    
+      await authentication({email: data.email})
+
       toast.success("Enviamos um link de confirmação no seu e-mail")
     } catch (error) {
       toast.error('Credencias inválidas.')
