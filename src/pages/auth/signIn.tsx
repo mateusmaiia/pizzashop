@@ -6,6 +6,8 @@ import {useForm} from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import {useMutation} from '@tanstack/react-query'
+import { signIn } from '@/api/sign-in'
 
 const signInForm = z.object({
 
@@ -17,7 +19,16 @@ type SignInForm = z.infer<typeof signInForm>
 
 
 export function SignIn() {
-  const {register,  handleSubmit, formState: {isSubmitting}} = useForm<SignInForm>()
+  const {
+    register,
+    handleSubmit, 
+    formState: {isSubmitting}
+  } = useForm<SignInForm>()
+
+  useMutation({
+    mutationFn: signIn,
+
+  })
 
   async function handleSignIn(data: SignInForm){
     try {
