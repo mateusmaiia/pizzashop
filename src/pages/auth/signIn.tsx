@@ -10,7 +10,6 @@ import {useMutation} from '@tanstack/react-query'
 import { signIn } from '@/api/sign-in'
 
 const signInForm = z.object({
-
   email: z.string().email(),
 })
 
@@ -27,18 +26,19 @@ export function SignIn() {
 
   const {mutateAsync: authentication} = useMutation({
     mutationFn: signIn,
-
   })
 
   async function handleSignIn(data: SignInForm){
     
     try {
-    
-      await authentication({email: data.email})
 
+      await authentication({email: data.email})
       toast.success("Enviamos um link de confirmação no seu e-mail")
+
     } catch (error) {
+
       toast.error('Credencias inválidas.')
+      
     }
   }
 
