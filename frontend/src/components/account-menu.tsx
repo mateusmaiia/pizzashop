@@ -8,13 +8,13 @@ import { getManagedRestaurant } from '@/api/get-managed-restaurant'
 
 export function AccountMenu(){
 
-    const {data: profile} = useQuery({
+    const {data: profile, isLoading: isLoadingProfile} = useQuery({
         queryKey: ['profile'],
         queryFn: getProfile
     })
     // agora se eu tiver outra requisição com esse nome de queryKey, ela não vai fazer essa requisição de NavigationOff, vai pegar do cache para evitar duplicar a requisição
 
-    const {data: managedRestaurant} = useQuery({
+    const {data: managedRestaurant, isLoading: isLoadingManagedRestaurant} = useQuery({
         queryKey: ['managed-restaurant'],
         queryFn: getManagedRestaurant
     })
