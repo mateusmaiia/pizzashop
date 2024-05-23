@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getProfile } from '@/api/get-profile'
 import { getManagedRestaurant } from '@/api/get-managed-restaurant'
+import { Skeleton } from './ui/skeleton'
 
 export function AccountMenu(){
 
@@ -24,7 +25,7 @@ export function AccountMenu(){
             {/* //asChild --> passa todas as funcionalidades e propriedades para o componente logo abaixo dele */}
             <DropdownMenuTrigger asChild>
                 <Button variant='outline' className='flex items-center gap-2 select-none'>
-                    {managedRestaurant?.name}
+                    {isLoadingManagedRestaurant ? <Skeleton className='h-4 w-40' /> : managedRestaurant?.name}
                     <ChevronDown />
                 </Button>
             </DropdownMenuTrigger>
