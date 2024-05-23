@@ -6,4 +6,15 @@ export const api = axios.create({
   withCredentials: true
 })
 
+
+//interceptors --> Antes de todas as requisições do axios, eu vou chamar essa daqui.   (estudar mais sobre depois INTERCEPTORS (serve para customizar dados de uma requisição))
+
+if(env.VITE_ENABLE_API_DELAY){
+  api.interceptors.request.use(async (config) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    return config
+  })
+}
+
 // withCredential: true --> faz com que os cookies do frontend sejam enviados para o backend
