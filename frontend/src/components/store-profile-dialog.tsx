@@ -6,7 +6,7 @@ import { Textarea } from './ui/textarea'
 import { zodResolver} from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { getManagedRestaurant } from '@/api/get-managed-restaurant'
+import { GetManagedRestaurantResponse, getManagedRestaurant } from '@/api/get-managed-restaurant'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { updateProfile } from '@/api/update-profile'
 import { toast } from 'sonner'
@@ -45,10 +45,10 @@ export function StoreProfileDialog(){
     const {mutateAsync: updateProfileFn} = useMutation({
         mutationFn: updateProfile,
         onSuccess(_, {name, description}){
-            const cached = queryClient.getQueryData(['managed-restaurant'])     //chave da query que quer pegar os dados. 
+            const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])     //chave da query que quer pegar os dados. 
 
             if(cached){
-                queryClient.setQueryData(['managed-restaurant'], {
+                queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
                         ...cached,
                         name,
                         description
