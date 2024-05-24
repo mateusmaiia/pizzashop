@@ -7,7 +7,7 @@ import { zodResolver} from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { getManagedRestaurant } from '@/api/get-managed-restaurant'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { updateProfile } from '@/api/update-profile'
 import { toast } from 'sonner'
 
@@ -23,11 +23,13 @@ type StoreProfileSchemaType = z.infer<typeof storeProfileSchema>
 
 
 export function StoreProfileDialog(){
+    const queryClient = useQueryClient()
 
     // Buscando dados do restaurante gerenciado
     const {data: managedRestaurant} = useQuery({
         queryKey: ['managed-restaurant'],
-        queryFn: getManagedRestaurant
+        queryFn: getManagedRestaurant,
+        staleTime: Infinity
     })
     
     // Configurando o formulário com validação usando o resolver do Zod
@@ -41,7 +43,19 @@ export function StoreProfileDialog(){
 
     // Configurando a mutação para atualizar o perfil
     const {mutateAsync: updateProfileFn} = useMutation({
-        mutationFn: updateProfile
+        mutationFn: updateProfile,
+        onSuccess(_, {name, description}){
+            const cached = queryClient.getQueryData(['managed-restaurant'])     //chave da query que quer pegar os dados. 
+
+            if(cached){
+                queryClient.setQueryData(['managed-restaurant'], {
+                        ...cached,
+                        name,
+                        description
+                    }
+                )
+            }
+        }
     })
 
     // Função de handle para atualizar o perfil
