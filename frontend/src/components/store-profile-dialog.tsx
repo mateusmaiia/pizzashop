@@ -82,7 +82,7 @@ export function StoreProfileDialog(){
                     </div>
                 </div>
                 <DialogFooter>
-                    <DialogClose>
+                    <DialogClose asChild>
                         <Button variant="ghost" type='button'>Cancelar</Button>
                     </DialogClose>
                     <Button type='submit' variant='success' disabled={isSubmitting}>Salvar</Button>
