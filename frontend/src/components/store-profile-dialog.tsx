@@ -1,5 +1,5 @@
 import { Button } from './ui/button'
-import { DialogContent, DialogHeader, DialogDescription, DialogTitle, DialogFooter } from './ui/dialog'
+import { DialogContent, DialogHeader, DialogDescription, DialogTitle, DialogFooter, DialogClose } from './ui/dialog'
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
@@ -82,7 +82,9 @@ export function StoreProfileDialog(){
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button variant="ghost" type='button'>Cancelar</Button>
+                    <DialogClose>
+                        <Button variant="ghost" type='button'>Cancelar</Button>
+                    </DialogClose>
                     <Button type='submit' variant='success' disabled={isSubmitting}>Salvar</Button>
                 </DialogFooter>
             </form>
