@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 // Definindo o esquema de validação com Zod
 const storeProfileSchema = z.object({
     name: z.string().min(1),
-    description: z.string()
+    description: z.string().nullable()
 }) 
 
 
@@ -41,19 +41,32 @@ export function StoreProfileDialog(){
         }
     })
 
+    function updateManagedRestaurantCache({name, description}:StoreProfileSchemaType){
+        const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])     //chave da query que quer pegar os dados. 
+
+        if(cached){
+            queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
+                    ...cached,
+                    name,
+                    description
+                }
+            )
+        }
+
+        return {cached}
+    }
+
     // Configurando a mutação para atualizar o perfil
     const {mutateAsync: updateProfileFn} = useMutation({
         mutationFn: updateProfile,
-        onSuccess(_, {name, description}){
-            const cached = queryClient.getQueryData<GetManagedRestaurantResponse>(['managed-restaurant'])     //chave da query que quer pegar os dados. 
+        onMutate({name, description}){
+            const {cached} = updateManagedRestaurantCache({name, description})
 
-            if(cached){
-                queryClient.setQueryData<GetManagedRestaurantResponse>(['managed-restaurant'], {
-                        ...cached,
-                        name,
-                        description
-                    }
-                )
+            return {previousProfile: cached}
+        },
+        onError(_, __, context){
+            if(context?.previousProfile){
+                updateManagedRestaurantCache(context.previousProfile)
             }
         }
     })
