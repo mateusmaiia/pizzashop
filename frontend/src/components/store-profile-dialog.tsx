@@ -7,7 +7,9 @@ import { zodResolver} from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { getManagedRestaurant } from '@/api/get-managed-restaurant'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { updateProfile } from '@/api/update-profile'
+import { toast } from 'sonner'
 
 // Definindo o esquema de validação com Zod
 const storeProfileSchema = z.object({
@@ -23,19 +25,38 @@ type StoreProfileSchemaType = z.infer<typeof storeProfileSchema>
 export function StoreProfileDialog(){
 
     // Buscando dados do restaurante gerenciado
-    const {data: managedRestaurant, isLoading: isLoadingManagedRestaurant} = useQuery({
+    const {data: managedRestaurant} = useQuery({
         queryKey: ['managed-restaurant'],
         queryFn: getManagedRestaurant
     })
     
     // Configurando o formulário com validação usando o resolver do Zod
-    const {register, handleSubmit } = useForm<StoreProfileSchemaType>({
+    const {register, handleSubmit, formState:{isSubmitting} } = useForm<StoreProfileSchemaType>({
         resolver: zodResolver(storeProfileSchema),
         values: {
             name: managedRestaurant?.name ?? '',
             description: managedRestaurant?.description ?? '',
         }
     })
+
+    // Configurando a mutação para atualizar o perfil
+    const {mutateAsync: updateProfileFn} = useMutation({
+        mutationFn: updateProfile
+    })
+
+    // Função de handle para atualizar o perfil
+    async function handleUpdateProfile(data:StoreProfileSchemaType){
+        try {
+            await updateProfileFn({
+                name: data.name,
+                description: data.description
+            })
+
+            toast.success('Perfil atualizado com sucesso!')
+        } catch (error) {
+            toast.error('Falha ao atualizar o perfil, tente novamente!')
+        }
+    }
 
     return(
         <DialogContent>
@@ -45,7 +66,7 @@ export function StoreProfileDialog(){
                     Atualize as informações do seu estabelecimento visíveis ao seu cliente
                 </DialogDescription>
             </DialogHeader>
-            <form >
+            <form onSubmit={handleSubmit(handleUpdateProfile)} >
                 <div className='space-y-4 py-4'>
                     <div className='grid grid-cols-4 items-center gap-4'>
                         <Label className='text-right' htmlFor='name'>
@@ -62,7 +83,7 @@ export function StoreProfileDialog(){
                 </div>
                 <DialogFooter>
                     <Button variant="ghost" type='button'>Cancelar</Button>
-                    <Button type='submit' variant='success'>Salvar</Button>
+                    <Button type='submit' variant='success' disabled={isSubmitting}>Salvar</Button>
                 </DialogFooter>
             </form>
         </DialogContent>
