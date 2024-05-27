@@ -18,7 +18,7 @@ export function Pagination({onPageChange, pageIndex,perPage,totalCount,}:Paginat
             <div className='flex items-center gap-6 lg:gap-8'>
                 <div className='flex text-sm font-medium'>Página {pageIndex + 1} de {pages}</div>
                 <div className='flex items-center gap-2'>
-                    <Button onClick={() => onPageChange(0)} variant="outline" className='h-8 w-8 p-0'>
+                    <Button onClick={() => onPageChange(0)} variant="outline" className='h-8 w-8 p-0' disabled={pageIndex === 0}>
                         <ChevronsLeft className='h- w-4'/>
                         <span className='sr-only'>Primeira página</span>
                     </Button>
@@ -33,7 +33,7 @@ export function Pagination({onPageChange, pageIndex,perPage,totalCount,}:Paginat
                         <span className='sr-only'>Próxima página</span>
                     </Button>
 
-                    <Button onClick={() => onPageChange(pages - 1)} variant="outline" className='h-8 w-8 p-0'>
+                    <Button onClick={() => onPageChange(pages - 1)} variant="outline" className='h-8 w-8 p-0' disabled={pageIndex <= pageIndex + 1 }>
                         <ChevronRight className='h- w-4'/>
                         <span className='sr-only'>Última página</span>
                     </Button>
