@@ -62,7 +62,7 @@ export function OrderTableFilters(){
             prev.delete('orderId')
             prev.delete('customerName')
             prev.delete('status')     
-            prev.delete('page', '1')      
+            prev.set('page', '1')      
             
 
             return prev
