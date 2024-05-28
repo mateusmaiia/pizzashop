@@ -12,9 +12,9 @@ const orderFiltersSchema = z.object({
     status: z.string().optional()
 })
 
-type orderFilters = z.infer<typeof orderFiltersSchema>
+type orderFiltersSchema = z.infer<typeof orderFiltersSchema>
 
-const {register} = useForm<orderFilters>({
+const {register} = useForm<orderFiltersSchema>({
     resolver: zodResolver(orderFiltersSchema)
 })
 
@@ -22,8 +22,8 @@ export function OrderTableFilters(){
     return(
         <form className='flex items-center gap-2'>
             <span className='text-sm font-semibold'>Filtros:</span>
-            <Input placeholder='ID do pedido' className='h-8 w-auto'/>
-            <Input placeholder='Nome do cliente' className='h-8 w-[320px]'/>
+            <Input placeholder='ID do pedido' className='h-8 w-auto' {...register('orderId')}/>
+            <Input placeholder='Nome do cliente' className='h-8 w-[320px]' {...register('customerName')}/>
             <Select defaultValue="all">
                 <SelectTrigger  className='h-8 w-[180px]'>
                     {/* Exibe o texto do item selecionado atualmente pelo usuário */}
