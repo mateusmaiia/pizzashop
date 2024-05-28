@@ -16,13 +16,13 @@ const orderFiltersSchema = z.object({
 
 export function OrderTableFilters(){
 
+    type orderFiltersSchema = z.infer<typeof orderFiltersSchema>
     const [searchParams, setSearchParams] = useSearchParams()
 
     const orderId = searchParams.get('orderId')
     const customerName = searchParams.get('customerName')
     const status = searchParams.get('status')
     
-    type orderFiltersSchema = z.infer<typeof orderFiltersSchema>
 
     const {register, handleSubmit, control} = useForm<orderFiltersSchema>({
         resolver: zodResolver(orderFiltersSchema),
@@ -32,6 +32,30 @@ export function OrderTableFilters(){
             status: status ?? 'all'
         }
     })
+
+    function handleFilter({ orderId, customerName, status}:orderFiltersSchema){
+        setSearchParams(prevState => {
+            if(orderId){
+                prevState.set('orderId', orderId)
+            }else{
+                prevState.delete('orderId')
+            }
+
+            if(customerName){
+                prevState.set('customerName', customerName)
+            }else{
+                prevState.delete('customerName')
+            }
+
+            if(status){
+                prevState.set('status', status)
+            }else{
+                prevState.delete('status')
+            }
+
+            return prevState
+        })
+    }
 
     return(
         <form className='flex items-center gap-2'>
@@ -67,7 +91,7 @@ export function OrderTableFilters(){
                 }}
             />
 
-            <Button type='submit' variant="secondary" size="xs">
+            <Button type='submit' variant="secondary" size="xs" onSubmit={handleSubmit(handleFilter)}>
                 <Search className='mr-2 h-4 w-4'/>
                 Filtrar resultados
             </Button>
