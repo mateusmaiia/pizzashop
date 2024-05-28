@@ -57,6 +57,18 @@ export function OrderTableFilters(){
         })
     }
 
+    function handleClearFilters(){
+        setSearchParams(prev => {
+            prev.delete('orderId')
+            prev.delete('customerName')
+            prev.delete('status')     
+            prev.delete('page', '1')      
+            
+            
+            return prev
+        })
+    }
+
     return(
         <form className='flex items-center gap-2'>
             <span className='text-sm font-semibold'>Filtros:</span>
@@ -65,7 +77,7 @@ export function OrderTableFilters(){
             <Controller 
                 name='status'
                 control={control}
-                render={({field: {name, onBlur, onChange, ref, value, disabled}}) => {
+                render={({field: {name, onChange, value, disabled}}) => {
                     return(
                         <Select 
                             name={name}
@@ -96,7 +108,7 @@ export function OrderTableFilters(){
                 Filtrar resultados
             </Button>
 
-            <Button type='button' variant="outline" size="xs">
+            <Button type='button' variant="outline" size="xs" onClick={handleClearFilters}>
                 <X className='mr-2 h-4 w-4'/>
                 Remover filtros
             </Button>
