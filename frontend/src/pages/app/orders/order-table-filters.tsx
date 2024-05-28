@@ -24,7 +24,7 @@ export function OrderTableFilters(){
     const status = searchParams.get('status')
     
 
-    const {register, handleSubmit, control} = useForm<orderFiltersSchema>({
+    const {register, handleSubmit, control, reset} = useForm<orderFiltersSchema>({
         resolver: zodResolver(orderFiltersSchema),
         defaultValues: {
             orderId: orderId ?? '', 
@@ -64,8 +64,14 @@ export function OrderTableFilters(){
             prev.delete('status')     
             prev.delete('page', '1')      
             
-            
+
             return prev
+        })
+
+        reset({
+            customerName: '',
+            orderId: '',
+            status: 'all'
         })
     }
 
