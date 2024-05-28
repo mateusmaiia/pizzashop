@@ -14,17 +14,21 @@ import { getOrders } from '@/api/get-orders'
 import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
-export function Orders() {
-
+export function Orders() {  
   const [searchParams, setSearchParams] = useSearchParams()
+
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
+  const status = searchParams.get('status')  
+
   const pageIndex = z.coerce
   .number()
   .transform((page) => page - 1)
   .parse(searchParams.get('page') ?? '1')
 
   const {data: result} = useQuery({
-    queryKey: ['orders',  pageIndex],
-    queryFn: () => getOrders({pageIndex})
+    queryKey: ['orders',  pageIndex, orderId, customerName, status],
+    queryFn: () => getOrders({pageIndex, customerName, orderId, status: status === 'all' ? null : status})
   })
 
   function handlePaginate(pageIndex: number) {
@@ -36,7 +40,8 @@ export function Orders() {
   }
 
 
-  return (
+
+  return (  
     <>
       <Helmet title="Pedidos" />
       <div className="flex flex-col gap-4">
