@@ -60,7 +60,7 @@ export function OrderTableRow({order}: OrderTableRowProps) {
         </Button>
       </TableCell>
       <TableCell className="">
-        <Button variant="ghost" size="xs">
+        <Button disabled={!['pendging', 'processing'].includes(order.status)} variant="ghost" size="xs">
           <X className="mr-2 h-3 w-3" />
           Cancelar
         </Button>
