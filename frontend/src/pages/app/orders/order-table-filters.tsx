@@ -1,7 +1,22 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { SelectItem, Select, SelectContent, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Search, X } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
+const orderFiltersSchema = z.object({
+    orderId: z.string().optional(),
+    customerName: z.string().optional(),
+    status: z.string().optional()
+})
+
+type orderFilters = z.infer<typeof orderFiltersSchema>
+
+const {register} = useForm<orderFilters>({
+    resolver: zodResolver(orderFiltersSchema)
+})
 
 export function OrderTableFilters(){
     return(
