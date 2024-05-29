@@ -6,7 +6,7 @@ import {  Utensils } from 'lucide-react'
 export function MonthOrdersAmounthCard(){
   
     const {data: monthOrdersAmount} = useQuery({
-      queryKey: ['metrics','month-orders-amouth'],
+      queryKey: ['metrics','month-orders-amount'],
       queryFn: getMonthOrdersAmount
     })
 
