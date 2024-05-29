@@ -1,7 +1,7 @@
 import { api } from '@/lib/axios'
 
 export interface GetMonthCanceledOrdersAmountResponse {
-  amount: number
+  amount: number;
   diffFromLastMonth: number
 }
 
