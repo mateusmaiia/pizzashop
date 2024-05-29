@@ -29,17 +29,17 @@ export function MonthRevenueCard(){
               </span>
               <p>
                 <p className="text-xs  text-muted-foreground">
-                  {monthRevenue.diffFromLastMonth < 0 ? (
+                  {monthRevenue.diffFromLastMonth >= 0 ? (
                     <>
                       <span className="text-emerald-500 dark:text-emerald-400">
-                        {monthRevenue.diffFromLastMonth}%
+                        +{monthRevenue.diffFromLastMonth}%
                       </span>{" "}
                       {"  "}Em relação ao mês passado
                     </>
                   ) : (
                     <>
                       <span className="text-rose-500 dark:text-rose-400">
-                        +{monthRevenue.diffFromLastMonth}%
+                        {monthRevenue.diffFromLastMonth}%
                       </span>{" "}
                       {"  "}Em relação ao mês passado
                     </>
