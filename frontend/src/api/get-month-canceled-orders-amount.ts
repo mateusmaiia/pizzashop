@@ -9,6 +9,6 @@ export async function getMonthCanceledOrdersAmount(){
   const response = await api.get<GetMonthCanceledOrdersAmountResponse>(
     '/metrics/month-canceled-orders-amount',
   )
-
+  console.log(response.data.amount)
   return response.data
 }
