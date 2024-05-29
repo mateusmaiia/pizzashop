@@ -7,7 +7,7 @@ export function MonthCanceledOrdersAmounthCard(){
 
     const {data: monthCanceledOrdersAmount} = useQuery({
       queryKey: ['metrics','month-canceled-orders-amount'],
-      queryFn: getMonthCanceledOrdersAmount
+      queryFn: getMonthCanceledOrdersAmount,
     })
 
     return(
@@ -20,31 +20,29 @@ export function MonthCanceledOrdersAmounthCard(){
         </CardHeader>
         <CardContent className="space-y-1">
           {monthCanceledOrdersAmount && (
-            <>
-              <span className="text-2xl font-bold tracking-tight">
-                {monthCanceledOrdersAmount.amount.toLocaleString('pt-BR')}
-              </span>
-              <p>
-                <p className="text-xs  text-muted-foreground">
-                  {monthCanceledOrdersAmount.diffFromLastMonth < 0 ? (
-                    <>
-                      <span className="text-emerald-500 dark:text-emerald-400">
-                        {monthCanceledOrdersAmount.diffFromLastMonth}%
-                      </span>{" "}
-                      {"  "}Em relação a ontem
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-rose-500 dark:text-rose-400">
-                        +{monthCanceledOrdersAmount.diffFromLastMonth}%
-                      </span>{" "}
-                      {"  "}Em relação a ontem
-                    </>
-                  )} 
-                </p>
-              </p>
-            </>
-          )}
+          <>
+            <span className="text-2xl font-bold tracking-tight">
+              {monthCanceledOrdersAmount.amount?.toLocaleString('pt-BR')}
+            </span>
+            <p className="text-xs text-muted-foreground">
+              {monthCanceledOrdersAmount.diffFromLastMonth < 0 ? (
+                <>
+                  <span className="text-emerald-500 dark:text-emerald-400">
+                    {monthCanceledOrdersAmount.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              ) : (
+                <>
+                  <span className="text-rose-500 dark:text-rose-400">
+                    +{monthCanceledOrdersAmount.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              )}
+            </p>
+          </>
+        )}
         </CardContent>
       </Card>
     )
