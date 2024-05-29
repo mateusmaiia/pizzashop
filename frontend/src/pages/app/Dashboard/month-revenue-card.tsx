@@ -1,7 +1,15 @@
+import { getMonthRevenue } from '@/api/get-month-revenue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
 
 export function MonthRevenueCard(){
+
+    const {data: monthRevenue} = useQuery({
+      queryKey: ['metrics','month-canceled-orders-amount'],
+      queryFn: getMonthRevenue
+    })
+
     return(
         <Card>
         <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
@@ -11,17 +19,35 @@ export function MonthRevenueCard(){
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent className="space-y-1">
-          <span className="text-2xl font-bold tracking-tight">
-            R$1248,00
-          </span>
-          <p>
-            <p className="text-xs  text-muted-foreground">
-              <span className="text-emerald-500 dark:text-emerald-400">
-                2%
-              </span>{" "}
-              {"  "}Em relação ao mês passado
-            </p>
-          </p>
+          {monthRevenue && (
+            <>
+              <span className="text-2xl font-bold tracking-tight">
+                {monthRevenue.receipt.toLocaleString('pt-BR', {
+                  style: "currency",
+                  currency: "BRL"
+                })}
+              </span>
+              <p>
+                <p className="text-xs  text-muted-foreground">
+                  {monthRevenue.diffFromLastMonth < 0 ? (
+                    <>
+                      <span className="text-emerald-500 dark:text-emerald-400">
+                        {monthRevenue.diffFromLastMonth}%
+                      </span>{" "}
+                      {"  "}Em relação ao mês passado
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-rose-500 dark:text-rose-400">
+                        +{monthRevenue.diffFromLastMonth}%
+                      </span>{" "}
+                      {"  "}Em relação ao mês passado
+                    </>
+                  )} 
+                </p>
+              </p>
+            </>
+          )}
         </CardContent>
       </Card>
     )
