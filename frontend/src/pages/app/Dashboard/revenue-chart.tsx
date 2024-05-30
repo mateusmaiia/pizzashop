@@ -23,7 +23,7 @@ import {
 } from "@/api/get-daily-revenue-in-period";
 import { Label } from '@/components/ui/label'
 import { DateRangePicker } from '@/components/ui/date-ranger-picker'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import {subDays} from 'date-fns'
 
@@ -42,6 +42,15 @@ export function RevenueChart() {
         to: dateRange?.to
       }),
     });
+    
+    const chartData = useMemo(() => {
+      return dailyRevenuePeriod?.map(chartItem => {
+        return({
+          date: chartItem.date,
+          receipt: chartItem.receipt / 100
+        })
+      }) 
+    }, [dailyRevenuePeriod])
 
   return (
     <Card className="col-span-6">
@@ -61,7 +70,7 @@ export function RevenueChart() {
       <CardContent>
         {dailyRevenuePeriod && (
           <ResponsiveContainer width="100%" height={240}>
-            <LineChart data={dailyRevenuePeriod} style={{ fontSize: 12 }}>
+            <LineChart data={chartData} style={{ fontSize: 12 }}>
               <XAxis dataKey="data" tickLine={false} axisLine={false} dy={16} />
               <YAxis
                 stroke="#888"
