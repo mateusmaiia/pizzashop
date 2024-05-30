@@ -21,6 +21,8 @@ import {
   getDailyRevenueInPeriod,
   getDailyRevenueInPeriodResponse,
 } from "@/api/get-daily-revenue-in-period";
+import { Label } from '@/components/ui/label'
+import { DateRangePicker } from '@/components/ui/date-ranger-picker'
 
 export function RevenueChart() {
   const { data: dailyRevenuePeriod } =
@@ -35,6 +37,10 @@ export function RevenueChart() {
         <div className="space-y-1 ">
           <CardTitle>Receita no período</CardTitle>
           <CardDescription> Receita diária no período</CardDescription>
+        </div>
+        <div className="flex items-center gap-3">
+          <Label>Período</Label>
+          <DateRangePicker />
         </div>
       </CardHeader>
       <CardContent>
