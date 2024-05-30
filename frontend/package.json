@@ -20,6 +20,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-query": "^5.36.2",
+    "@testing-library/user-event": "^14.5.2",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -54,10 +55,12 @@
     "eslint": "^9.1.1",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslit": "^6.0.0",
+    "happy-dom": "^14.12.0",
     "postcss": "^8.4.38",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
+    "user-event": "link:@testing/library/user-event",
     "vite": "^5.2.0",
     "vitest": "^1.6.0"
   }
