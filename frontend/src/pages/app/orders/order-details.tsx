@@ -18,6 +18,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { OrderDetailsSkeleton } from './order-details-skeleton'
 
 export interface OrderDetailProps{
   orderId: string,
@@ -26,7 +27,7 @@ export interface OrderDetailProps{
 
 export function OrderDetails({orderId, open}:OrderDetailProps) {
 
-  const { data: order } = useQuery<orderDetailsResponse>({
+  const { data: order, isLoading: isLoadingOrderDetails} = useQuery<orderDetailsResponse>({
     queryKey: ['order', orderId],
     queryFn: () => getOrderDetails({orderId}),
     enabled: open, //query só vai ser feita quando open for true. (assim que o modal for aberto)
@@ -39,6 +40,7 @@ export function OrderDetails({orderId, open}:OrderDetailProps) {
         <DialogTitle>Pedido: {orderId}</DialogTitle>
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
+      {isLoadingOrderDetails && <OrderDetailsSkeleton />}
       {order && (
         <div className="space-y-6">
           <Table>
