@@ -6,12 +6,13 @@ import { AuthLayout } from "./pages/_layouts/auth";
 import { SignUp } from "./pages/auth/signUp";
 import { Orders } from "./pages/app/orders/orders";
 import { NotFound } from './pages/Error404'
+import { Error } from './pages/error'
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-    errorElement: <NotFound />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -37,4 +38,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // qualquer endereço que nao der match com um dos endereços acima, vai ir para esta página
+  {
+    path: '*',
+    element: <NotFound />
+  }
 ]);
