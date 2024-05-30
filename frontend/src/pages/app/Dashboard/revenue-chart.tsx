@@ -22,16 +22,6 @@ import {
   getDailyRevenueInPeriodResponse,
 } from "@/api/get-daily-revenue-in-period";
 
-const data = [
-  { data: "10/12", revenue: 1200 },
-  { data: "12/12", revenue: 800 },
-  { data: "13/12", revenue: 900 },
-  { data: "14/12", revenue: 400 },
-  { data: "15/12", revenue: 2300 },
-  { data: "16/12", revenue: 800 },
-  { data: "17/12", revenue: 640 },
-];
-
 export function RevenueChart() {
   const { data: dailyRevenuePeriod } =
     useQuery<getDailyRevenueInPeriodResponse>({
