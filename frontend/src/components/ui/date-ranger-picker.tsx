@@ -5,14 +5,21 @@ import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-export function DatePickerWithRange({
+interface DateRangePickerProps extends React.ComponentProps<'div'>{
+ date: DateRange
+ onDateChange: (date: DateRange | undefined) => void 
+}
+
+export function DateRangePicker({
+  date,
+  onDateChange
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: DateRangePickerProps) {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(2022, 0, 20),
     to: addDays(new Date(2022, 0, 20), 20),
