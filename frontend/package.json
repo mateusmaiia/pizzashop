@@ -28,6 +28,7 @@
     "localforage": "^1.10.0",
     "lucide-react": "^0.373.0",
     "match-sorter": "^6.3.4",
+    "msw": "^2.3.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
@@ -63,5 +64,10 @@
     "user-event": "link:@testing/library/user-event",
     "vite": "^5.2.0",
     "vitest": "^1.6.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
