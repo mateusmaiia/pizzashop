@@ -23,9 +23,8 @@ export function MonthOrdersAmounthCard(){
           {monthOrdersAmount ? (
               <>
                 <span className="text-2xl font-bold tracking-tight">
-                  {monthOrdersAmount.amount.toLocaleString('pt-BR')}
+                  {monthOrdersAmount?.amount.toLocaleString('pt-BR')}
                 </span>
-                <p>
                   <p className="text-xs  text-muted-foreground">
                     {monthOrdersAmount.diffFromLastMonth >= 0 ? (
                       <>
@@ -43,7 +42,6 @@ export function MonthOrdersAmounthCard(){
                       </>
                     )} 
                   </p>
-                </p>
               </>
             ): (
               <MetricCardSkeleton />

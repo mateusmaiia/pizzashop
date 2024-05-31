@@ -28,7 +28,6 @@ export function MonthRevenueCard(){
                   currency: "BRL"
                 })}
               </span>
-              <p>
                 <p className="text-xs  text-muted-foreground">
                   {monthRevenue.diffFromLastMonth >= 0 ? (
                     <>
@@ -46,7 +45,6 @@ export function MonthRevenueCard(){
                     </>
                   )} 
                 </p>
-              </p>
             </>
           ): (
             <MetricCardSkeleton />

@@ -25,7 +25,6 @@ export function DayOrdersAmounthCard(){
               <span className="text-2xl font-bold tracking-tight">
                 {dayOrdersAmount.amount.toLocaleString('pt-BR')}
               </span>
-              <p>
                 <p className="text-xs  text-muted-foreground">
                   {dayOrdersAmount.diffFromYesterday >= 0 ? (
                     <>
@@ -43,7 +42,6 @@ export function DayOrdersAmounthCard(){
                     </>
                   )} 
                 </p>
-              </p>
             </>
           ) : (
             <MetricCardSkeleton />
